@@ -1,3 +1,6 @@
+import initialCards from './cards';
+import './pages/index.css';
+
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector("#card-template").content;
 
@@ -29,3 +32,14 @@ initialCards.forEach((card) => {
     const cardElement = createCard(card, deleteCard);
     cardsContainer.appendChild(cardElement);
 });
+
+
+
+const editButton = document.querySelector('.profile__edit-button');
+const editPopup = document.querySelector('.popup_type_edit');
+
+function openPopup() {
+    editPopup.classList.add('popup_opened');
+}
+
+editButton.addEventListener('click', openPopup);
