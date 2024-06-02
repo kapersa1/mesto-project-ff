@@ -35,11 +35,25 @@ initialCards.forEach((card) => {
 
 
 
+
+
 const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
 const editPopup = document.querySelector('.popup_type_edit');
+const addPopup = document.querySelector('.popup_type_new-card');
+const closeButtons = document.querySelectorAll('.popup__close');
+const overlay = document.querySelectorAll('.popup');
 
-function openPopup() {
-    editPopup.classList.add('popup_opened');
-}
+function openPopup(element) {
+    element.classList.add('popup_opened');
+};
 
-editButton.addEventListener('click', openPopup);
+function closePopup(element) {
+    element.classList.remove('popup_opened');
+};
+
+editButton.addEventListener('click', () => openPopup(editPopup));
+
+closeButtons.forEach(button => {
+    button.addEventListener('click', () => closePopup(editPopup));
+});
