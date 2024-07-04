@@ -1,25 +1,28 @@
-// Обработчик закрытия по клавише Esc
-function сlosePopupWithEscBtn(evt, element) {
+function сlosePopupWithEscBtn(evt) {
   if (evt.key === "Escape") {
-    closePopup(element);
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closePopup(openedPopup);
+    }
   }
 }
 
-// Открытие попапа
+// Функция открытия попапа
 export function openPopup(element) {
   element.classList.add("popup_is-animated");
   setTimeout(() => {
     element.classList.add("popup_is-opened");
   }, 50);
-  document.addEventListener("keydown", (evt) =>
-    сlosePopupWithEscBtn(evt, element)
-  );
+  document.addEventListener("keydown", сlosePopupWithEscBtn); 
 }
 
-// Закрытие попапа
+// Функция закрытия попапа
 export function closePopup(element) {
   element.classList.remove("popup_is-opened");
-  document.removeEventListener("keydown", (evt) =>
-    сlosePopupWithEscBtn(evt, element)
-  );
+  document.removeEventListener("keydown", сlosePopupWithEscBtn); }
+
+export function closePopupOnOutsideClick(event) {
+  if (event.target.classList.contains("popup_is-opened")) {
+    closePopup(event.target);
+  }
 }

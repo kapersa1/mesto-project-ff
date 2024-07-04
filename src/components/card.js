@@ -1,7 +1,7 @@
-import { openCardImage, likeToggle } from "..";
+
 const cardTemplate = document.querySelector("#card-template").content;
 
-export function createCard({ link, name }, deleteCard) {
+export function createCard({ link, name }, deleteCard, openCardImage, likeToggle) {
   const cardItem = cardTemplate.querySelector(".card").cloneNode(true);
   const cardDeleteButton = cardItem.querySelector(".card__delete-button");
   const cardImg = cardItem.querySelector(".card__image");
@@ -25,3 +25,5 @@ export function createCard({ link, name }, deleteCard) {
 export function deleteCard(cardItem) {
   cardItem.remove();
 }
+
+
