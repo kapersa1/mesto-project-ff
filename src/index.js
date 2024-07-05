@@ -84,7 +84,7 @@ function newPlaceFormSubmit(evt) {
     link: newUrlCard,
   };
 
-  const cardElement = createCard(newCard, deleteCard);
+  const cardElement = createCard(newCard, deleteCard, openCardImage, likeToggle);
 
   placesList.prepend(cardElement);
 
