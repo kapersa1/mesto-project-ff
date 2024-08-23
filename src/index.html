@@ -22,9 +22,13 @@
         <section class="profile page__section">
           <div class="profile__image">
             <button class="profile__avatar-button" type="button">
-                <img src="текущий-аватар.jpg" alt="Аватар пользователя" class="profile__avatar">
+              <img
+                src="текущий-аватар.jpg"
+                alt="Аватар пользователя"
+                class="profile__avatar"
+              />
             </button>
-        </div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -58,7 +62,9 @@
               maxlength="40"
               required
             />
-            <span class="popup__input-error popup__input-error_visible name-input-error"></span>
+            <span
+              class="popup__input-error popup__input-error_visible name-input-error"
+            ></span>
             <input
               id="description-input"
               type="text"
@@ -70,7 +76,9 @@
               maxlength="200"
               required
             />
-            <span class="popup__input-error popup__input-error_visible description-input-error"></span>
+            <span
+              class="popup__input-error popup__input-error_visible description-input-error"
+            ></span>
             <button type="submit" class="button popup__button" disabled>
               Сохранить
             </button>
@@ -96,7 +104,9 @@
               maxlength="30"
               required
             />
-            <span class="popup__input-error popup__input-error_visible place-input-error"></span>
+            <span
+              class="popup__input-error popup__input-error_visible place-input-error"
+            ></span>
 
             <input
               id="place-url-input"
@@ -107,7 +117,9 @@
               placeholder="Ссылка на картинку"
               required
             />
-            <span class="popup__input-error popup__input-error_visible place-url-input-error"></span>
+            <span
+              class="popup__input-error popup__input-error_visible place-url-input-error"
+            ></span>
 
             <button type="submit" class="button popup__button" disabled>
               Сохранить
@@ -139,14 +151,16 @@
               placeholder="Ссылка на картинку"
               required
             />
-            <span class="popup__input-error avatar-input-error"></span>
+            <span
+              class="popup__input-error popup__input-error_visible avatar-input-error"
+            ></span>
             <button type="submit" class="button popup__button" disabled>
               Сохранить
             </button>
           </form>
         </div>
       </div>
-      
+
       <template id="card-template">
         <li class="places__item card">
           <img class="card__image" src="" alt="" />

@@ -13,13 +13,14 @@ export function openPopup(element) {
   setTimeout(() => {
     element.classList.add("popup_is-opened");
   }, 50);
-  document.addEventListener("keydown", сlosePopupWithEscBtn); 
+  document.addEventListener("keydown", сlosePopupWithEscBtn);
 }
 
 // Функция закрытия попапа
 export function closePopup(element) {
   element.classList.remove("popup_is-opened");
-  document.removeEventListener("keydown", сlosePopupWithEscBtn); }
+  document.removeEventListener("keydown", сlosePopupWithEscBtn);
+}
 
 export function closePopupOnOutsideClick(event) {
   if (event.target.classList.contains("popup_is-opened")) {

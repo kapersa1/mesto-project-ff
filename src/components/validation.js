@@ -4,30 +4,33 @@ export const validationConfig = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_invalid", 
-  errorClass: "popup__input-error_visible", 
+  inputErrorClass: "popup__input_invalid",
+  errorClass: "popup__input-error_visible",
 };
 
 // Отображение ошибки ввода
 const showInputError = (formElement, inputElement, errorMessage, config) => {
-  const errorElement = formElement.querySelector(`.${inputElement.dataset.error}`);
+  const errorElement = formElement.querySelector(
+    `.${inputElement.dataset.error}`
+  );
   if (errorElement) {
     inputElement.classList.add(config.inputErrorClass);
-    inputElement.classList.add('popup__input_invalid');
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(config.errorClass); // Класс для отображения ошибки
-
+    errorElement.classList.add(config.errorClass);
   } else {
-    console.error(`Элемент для отображения ошибки не найден: ${inputElement.dataset.error}`);
+    console.error(
+      `Элемент для отображения ошибки не найден: ${inputElement.dataset.error}`
+    );
   }
 };
 
 const hideInputError = (formElement, inputElement, config) => {
-  const errorElement = formElement.querySelector(`.${inputElement.dataset.error}`);
+  const errorElement = formElement.querySelector(
+    `.${inputElement.dataset.error}`
+  );
   if (errorElement) {
     inputElement.classList.remove(config.inputErrorClass);
-    errorElement.classList.remove(config.errorClass); 
-    inputElement.classList.remove('popup__input_invalid');// Удаление класса ошибки
+    errorElement.classList.remove(config.errorClass);
     errorElement.textContent = "";
   }
 };
@@ -35,7 +38,12 @@ const hideInputError = (formElement, inputElement, config) => {
 // Проверка валидности поля ввода
 const isValid = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, config);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      config
+    );
   } else {
     hideInputError(formElement, inputElement, config);
   }
@@ -43,7 +51,9 @@ const isValid = (formElement, inputElement, config) => {
 
 // Установка слушателей событий
 const setEventListeners = (formElement, config) => {
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelector)
+  );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   // Устанавливаем начальное состояние кнопки отправки
@@ -83,9 +93,11 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   }
 };
 
-// Очистка валидации 
+// Очистка валидации
 export const clearValidation = (formElement, config) => {
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelector)
+  );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   inputList.forEach((inputElement) => {

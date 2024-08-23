@@ -1,6 +1,12 @@
 import { removeCard, toggleLikeCard } from "./api.js"; // Импорт функций для удаления и лайков карточек с сервера
 
-export function createCard({ link, name, _id, owner, likes }, deleteCard, openCardImage, likeToggle, userId) {
+export function createCard(
+  { link, name, _id, owner, likes },
+  deleteCard,
+  openCardImage,
+  likeToggle,
+  userId
+) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardItem = cardTemplate.querySelector(".card").cloneNode(true);
   const cardDeleteButton = cardItem.querySelector(".card__delete-button");
@@ -23,7 +29,9 @@ export function createCard({ link, name, _id, owner, likes }, deleteCard, openCa
   }
 
   cardLikeButton.addEventListener("click", () => {
-    const isLiked = cardLikeButton.classList.contains("card__like-button_is-active");
+    const isLiked = cardLikeButton.classList.contains(
+      "card__like-button_is-active"
+    );
     likeToggle(cardLikeButton, _id, isLiked, likeCountElement);
   });
 

@@ -1,8 +1,18 @@
 import "./pages/index.css";
-import { createCard, deleteCard, likeToggle } from "./components/card.js"; 
-import { openPopup, closePopup, closePopupOnOutsideClick } from "./components/modal.js";
+import { createCard, deleteCard, likeToggle } from "./components/card.js";
+import {
+  openPopup,
+  closePopup,
+  closePopupOnOutsideClick,
+} from "./components/modal.js";
 import { enableValidation, clearValidation } from "./components/validation.js";
-import { getUserData, getInitialCards, patchUserData, postNewCard, updateAvatar } from "./components/api.js";
+import {
+  getUserData,
+  getInitialCards,
+  patchUserData,
+  postNewCard,
+  updateAvatar,
+} from "./components/api.js";
 
 const cardsContainer = document.querySelector(".places__list");
 const editButton = document.querySelector(".profile__edit-button");
@@ -13,24 +23,40 @@ const closeButtons = document.querySelectorAll(".popup__close");
 const openModalImage = document.querySelector(".popup_type_image");
 const cardImagePopup = document.querySelector(".popup__image");
 const cardNamePopup = document.querySelector(".popup__caption");
-const editProfileForm = document.querySelector('.popup__form[name="edit-profile"]');
+const editProfileForm = document.querySelector(
+  '.popup__form[name="edit-profile"]'
+);
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
+const newCardInput = document.querySelector(".popup__input_type_card-name");
+const newUrlinput = document.querySelector(".popup__input_type_url");
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const editNewPlaceForm = document.querySelector('.popup__form[name="new-place"]');
+const editNewPlaceForm = document.querySelector(
+  '.popup__form[name="new-place"]'
+);
 const placesList = document.querySelector(".places__list");
 const avatarButton = document.querySelector(".profile__avatar-button");
 const avatarPopup = document.querySelector(".popup_type_avatar_edit");
 const avatarForm = document.querySelector('.popup__form[name="edit-avatar"]');
+const avatarUrlInput = document.querySelector(".popup__input_type_avatar");
 const profileAvatar = document.querySelector(".profile__image img");
-
-let userId; 
+const saveButton = document.querySelector(".popup__button");
+const profileSaveButton = editPopup.querySelector(".popup__button");
+const newPlaceSaveButton = addPopup.querySelector(".popup__button");
+const avatarSaveButton = avatarPopup.querySelector(".popup__button");
+let userId;
 
 // Функция для создания карточек
 function renderCards(cards) {
   cards.forEach((card) => {
-    const cardElement = createCard(card, deleteCard, openCardImage, likeToggle, userId);
+    const cardElement = createCard(
+      card,
+      deleteCard,
+      openCardImage,
+      likeToggle,
+      userId
+    );
     cardsContainer.appendChild(cardElement);
   });
 }
@@ -38,7 +64,7 @@ function renderCards(cards) {
 // Загрузка данных пользователя и карточек
 Promise.all([getUserData(), getInitialCards()])
   .then(([userData, cards]) => {
-    userId = userData._id; 
+    userId = userData._id;
     profileName.textContent = userData.name;
     profileDescription.textContent = userData.about;
     profileAvatar.src = userData.avatar;
@@ -66,9 +92,8 @@ function openCardImage(link, name) {
 function profileFormSubmit(evt) {
   evt.preventDefault();
 
-  const saveButton = editProfileForm.querySelector('.popup__button');
-  const originalText = saveButton.textContent;
-  saveButton.textContent = 'Сохранение...';
+  const originalText = profileSaveButton.textContent;
+  profileSaveButton.textContent = "Сохранение...";
 
   const newName = nameInput.value;
   const newJob = jobInput.value;
@@ -81,7 +106,7 @@ function profileFormSubmit(evt) {
     })
     .catch((err) => console.error(err))
     .finally(() => {
-      saveButton.textContent = originalText;
+      profileSaveButton.textContent = originalText;
     });
 }
 
@@ -89,35 +114,38 @@ function profileFormSubmit(evt) {
 function newPlaceFormSubmit(evt) {
   evt.preventDefault();
 
-  const saveButton = editNewPlaceForm.querySelector('.popup__button');
-  const originalText = saveButton.textContent;
-  saveButton.textContent = 'Сохранение...';
+  const originalText = newPlaceSaveButton.textContent;
+  newPlaceSaveButton.textContent = "Сохранение...";
 
-  const newNameCard = editNewPlaceForm.querySelector(".popup__input_type_card-name").value;
-  const newUrlCard = editNewPlaceForm.querySelector(".popup__input_type_url").value;
+  const newNameCard = newCardInput.value;
+  const newUrlCard = newUrlinput.value;
 
   postNewCard(newNameCard, newUrlCard)
     .then((newCard) => {
-      const cardElement = createCard(newCard, deleteCard, openCardImage, likeToggle, userId);
+      const cardElement = createCard(
+        newCard,
+        deleteCard,
+        openCardImage,
+        likeToggle,
+        userId
+      );
       placesList.prepend(cardElement);
       editNewPlaceForm.reset();
       closePopup(addPopup);
     })
     .catch((err) => console.error(err))
     .finally(() => {
-      saveButton.textContent = originalText;
+      newPlaceSaveButton.textContent = originalText;
     });
 }
 
 // Обновление аватара
 avatarForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
+  const originalText = avatarSaveButton.textContent;
+  avatarSaveButton.textContent = "Сохранение...";
 
-  const saveButton = avatarForm.querySelector('.popup__button');
-  const originalText = saveButton.textContent;
-  saveButton.textContent = 'Сохранение...';
-
-  const avatarUrl = avatarForm.querySelector(".popup__input_type_avatar").value;
+  const avatarUrl = avatarUrlInput.value;
 
   updateAvatar({ avatar: avatarUrl })
     .then((userData) => {
@@ -126,7 +154,7 @@ avatarForm.addEventListener("submit", (evt) => {
     })
     .catch((err) => console.error(err))
     .finally(() => {
-      saveButton.textContent = originalText;
+      avatarSaveButton.textContent = originalText;
     });
 });
 
