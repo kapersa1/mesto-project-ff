@@ -195,3 +195,5 @@ document.querySelectorAll(".popup").forEach((popup) => {
 
 editProfileForm.addEventListener("submit", profileFormSubmit);
 editNewPlaceForm.addEventListener("submit", newPlaceFormSubmit);
+
+
