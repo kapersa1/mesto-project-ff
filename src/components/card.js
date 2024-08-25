@@ -19,6 +19,11 @@ export function createCard(
   cardItem.querySelector(".card__title").textContent = name;
   likeCountElement.textContent = likes.length; // Устанавливаем количество лайков
 
+  // Проверяем, есть ли лайк от текущего пользователя
+  if (likes.some((like) => like._id === userId)) {
+    cardLikeButton.classList.add("card__like-button_is-active");
+  }
+
   // Отображаем кнопку удаления только на карточках пользователя
   if (owner._id !== userId) {
     cardDeleteButton.remove();
